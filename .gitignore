@@ -1,0 +1,22 @@
+# 本仓库只放发布资产（README 与 Release 附件），不放源码。
+#
+# 如果有人不小心把安装包提交进来，这个 .gitignore 能挡住 —— 安装包应该
+# 走 Release 附件，那样不会永久留在 git 历史里（每版 31 MB，删不掉）。
+
+# 安装包与压缩包
+*.exe
+*.msi
+*.zip
+*.tar.gz
+*.7z
+
+# 模型与引擎（体积巨大）
+*.gguf
+*.onnx
+*.bin
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
