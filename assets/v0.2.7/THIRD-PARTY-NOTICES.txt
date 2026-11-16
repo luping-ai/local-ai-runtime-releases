@@ -1,0 +1,120 @@
+# 第三方组件许可声明
+
+本产品包含或依赖以下第三方组件。各自的许可条款独立于本产品，
+分发本产品时须随附这些声明。
+
+生成时间：2026-11-12
+依赖来源：`go list -deps ./cmd/localai-cli` 的实际运行期依赖
+
+---
+
+## 运行时依赖（Go 模块）
+
+### github.com/ledongthuc/pdf
+
+- 许可：BSD-3-Clause
+- 用途：PDF 文本提取
+- 项目：https://github.com/ledongthuc/pdf
+- 义务：随附版权声明与许可全文
+
+### modernc.org/sqlite
+
+- 许可：BSD-3-Clause
+- 用途：纯 Go SQLite 实现（零 CGO 的关键依赖）
+- 项目：https://gitlab.com/cznic/sqlite
+- 义务：随附版权声明与许可全文
+
+### modernc.org/libc / memory / mathutil
+
+- 许可：BSD-3-Clause
+- 用途：modernc.org/sqlite 的传递依赖
+- 项目：https://gitlab.com/cznic/libc 等
+
+### github.com/dustin/go-humanize
+
+- 许可：MIT
+- 用途：字节数的人类可读格式化
+- 项目：https://github.com/dustin/go-humanize
+
+### github.com/mattn/go-isatty
+
+- 许可：MIT
+- 用途：判断标准输出是否为终端
+- 项目：https://github.com/mattn/go-isatty
+
+### github.com/ncruces/go-strftime
+
+- 许可：MIT
+- 用途：时间格式化（SQLite 依赖）
+- 项目：https://github.com/ncruces/go-strftime
+
+### github.com/remyoudompheng/bigfft
+
+- 许可：BSD-3-Clause
+- 用途：大数运算（SQLite 依赖）
+- 项目：https://github.com/remyoudompheng/bigfft
+
+### golang.org/x/sys
+
+- 许可：BSD-3-Clause
+- 用途：Windows Job Object / cgroup 系统调用
+- 项目：https://pkg.go.dev/golang.org/x/sys
+
+---
+
+## 随包分发的二进制
+
+### llama.cpp（llama-server 及相关工具）
+
+- 许可：**MIT**
+- 用途：推理引擎子进程
+- 项目：https://github.com/ggml-org/llama.cpp
+- 版本：b12255（win-cpu-x64 构建）
+- 义务：**必须随附 MIT 许可全文与版权声明**
+
+本发行包内 `engines/llama-cpu/` 目录包含该项目的可执行文件与
+动态库。MIT 许可要求：在任何副本中保留上述版权声明与许可声明。
+
+### libomp（LLVM OpenMP 运行时）
+
+- 许可：Apache-2.0 WITH LLVM-exception
+- 文件：`engines/llama-cpu/LICENSE-LLVM-OpenMP`
+- 项目：https://llvm.org/
+
+---
+
+## 模型文件（不随本包分发）
+
+模型权重需用户自行下载，受各自许可约束。本包仅包含描述模型的
+清单文件（`models/registry/*.json`），清单中的 `license` 字段
+记录了各模型的许可。
+
+| 模型 | 许可 | 商用条件 |
+| --- | --- | --- |
+| Qwen2.5 系列 | Apache-2.0 | 允许 |
+| Qwen3 系列 | Apache-2.0 | 允许 |
+| Granite 4.0 系列 | Apache-2.0 | 允许 |
+| multilingual-e5-small | MIT | 允许 |
+| **LFM2.5-350M** | **LFM Open License v1.0** | **有条件** |
+
+### LFM Open License v1.0 特别提示
+
+该许可第 5(a) 条规定：商用授权以「You 或 Your Legal Entity 未超过
+Threshold」为条件，Threshold 为年营收 **1000 万美元或以上**。
+第 5(b) 条明确：超过 Threshold 的实体对该作品的商用**不被授权**。
+第 11 条：违反任一条件，许可**自动立即终止**。
+
+若本产品可能越过该营收门槛，应改用 Apache-2.0 / MIT 许可的模型
+（如 Qwen 系列），而非 LFM。
+
+---
+
+## 分发检查清单
+
+打包分发前确认：
+
+- [ ] `LICENSE`（本产品自身）随包
+- [ ] `THIRD-PARTY-NOTICES.md`（本文件）随包
+- [ ] `engines/llama-cpu/` 内含 llama.cpp 的 MIT 许可文本
+- [ ] 若分发了 LFM 模型，随附完整 `LFM-Open-License-v1.0.txt`
+- [ ] 若分发了模型，保留其原始 LICENSE 与 NOTICE 文件
